@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/api_services/api_services.dart';
 import '../../../../core/api_services/urls.dart';
 import '../../../../core/errors/failuer.dart';
-import '../models/aprtments_data_model.dart';
+import '../models/apartments_data_model.dart';
 import 'home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {

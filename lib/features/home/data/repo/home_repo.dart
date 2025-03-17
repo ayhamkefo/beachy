@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../models/aprtments_data_model.dart';
+import '../models/apartments_data_model.dart';
 import '../../../../core/errors/failuer.dart';
 
 abstract class HomeRepo {

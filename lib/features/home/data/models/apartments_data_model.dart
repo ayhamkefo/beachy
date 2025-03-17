@@ -1,4 +1,4 @@
-import 'aprrtments_model.dart';
+import 'apartments_model.dart';
 import 'map_data.dart';
 
 class ApartmentsData {
