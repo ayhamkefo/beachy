@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/models/aprtments_model.dart';
+import '../../../data/models/aprrtments_model.dart';
 import '../../../data/repo/home_repo.dart';
 
 part 'home_event.dart';

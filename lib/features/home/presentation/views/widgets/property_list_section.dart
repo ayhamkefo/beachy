@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:beachy/features/home/data/models/aprtments_model.dart';
+import '../../../data/models/aprrtments_model.dart';
 import 'property_list_widgets/property_item_widget.dart';
 
 class PropertyListSection extends StatelessWidget {
