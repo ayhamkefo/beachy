@@ -36,8 +36,8 @@ class CustomErrorWidget extends StatelessWidget {
           const SizedBox(height: kSizedBoxHeight),
           Text(
             errorMessage,
-            style: Styles.textStyle18
-                .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+            style: Styles.textStyle18.copyWith(
+                color: textColor ?? Colors.white, fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: kSizedBoxHeight),

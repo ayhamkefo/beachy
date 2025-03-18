@@ -9,9 +9,10 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: AppColors.purpelTextColor,
-      unselectedItemColor: AppColors.lightGrayTextColor,
+      unselectedItemColor: AppColors.darkGrayTextColor,
       items: [
         BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsData.explore), label: 'Explore'),

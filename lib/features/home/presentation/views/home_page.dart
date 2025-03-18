@@ -52,23 +52,7 @@ class _HomePageState extends State<HomePage>
       body: NestedScrollView(
         physics: const BouncingScrollPhysics(),
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            pinned: true,
-            backgroundColor: AppColors.backgroundColor,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            title: const LocationHeader(),
-            bottom: PreferredSize(
-              preferredSize:
-                  Size.fromHeight(MediaQuery.sizeOf(context).height * 0.15),
-              child: Column(
-                children: [
-                  const SearchBarSection(),
-                  CategoryTabBar(tabController: _tabController),
-                ],
-              ),
-            ),
-          ),
+          HomeAppBar(tabController: _tabController),
         ],
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
@@ -78,6 +62,7 @@ class _HomePageState extends State<HomePage>
             if (state.status == HomeStatus.failure) {
               return CustomErrorWidget(
                 errorMessage: state.errorMessage!,
+                textColor: AppColors.darkTextColor,
                 onRetry: () => context.read<HomeBloc>().add(FetchApartments()),
               );
             }
@@ -95,5 +80,42 @@ class _HomePageState extends State<HomePage>
       ),
       bottomNavigationBar: const CustomBottomNavBar(),
     );
+  }
+}
+
+class HomeAppBar extends StatelessWidget {
+  const HomeAppBar({
+    super.key,
+    required TabController tabController,
+  }) : _tabController = tabController;
+
+  final TabController _tabController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: true,
+      backgroundColor: AppColors.backgroundColor,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      title: const LocationHeader(),
+      bottom: PreferredSize(
+        preferredSize:
+            Size.fromHeight(getAppBarSize(MediaQuery.sizeOf(context).height)),
+        child: Column(
+          children: [
+            const SearchBarSection(),
+            CategoryTabBar(tabController: _tabController),
+          ],
+        ),
+      ),
+    );
+  }
+
+  double getAppBarSize(double hegit) {
+    if (hegit >= 750) return hegit * 0.18;
+    if (hegit >= 600 && hegit < 750) return hegit * 0.2;
+    if (hegit >= 500 && hegit < 600) return hegit * 0.24;
+    return hegit * 0.28;
   }
 }

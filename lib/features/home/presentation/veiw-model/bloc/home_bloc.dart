@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     FetchApartments event,
     Emitter<HomeState> emit,
   ) async {
-    if (state.hasReachedMax) return;
+    if (state.hasReachedMax || state.status == HomeStatus.loading) return;
     try {
       emit(state.copyWith(
         status: HomeStatus.loading,
@@ -36,11 +36,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             ...state.apartments,
             ...data.apartmentsData.data
           ];
-          // final hasReachedMax = !data.apartmentsData.meta.hasMorePages;
+          final hasReachedMax = !data.apartmentsData.meta.hasMorePages;
           emit(state.copyWith(
             status: HomeStatus.success,
             apartments: newApartments,
-            hasReachedMax: true, //hasReachedMax,
+            hasReachedMax: hasReachedMax,
             currentPage: nextPage,
           ));
         },

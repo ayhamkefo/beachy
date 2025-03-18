@@ -13,7 +13,7 @@ class DiscountBanner extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.discountBackgroundColor,
+        color: AppColors.lightBagdesColor,
         borderRadius: BorderRadius.circular(42),
       ),
       child: Row(

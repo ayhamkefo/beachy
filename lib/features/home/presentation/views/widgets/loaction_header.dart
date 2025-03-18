@@ -9,31 +9,47 @@ class LocationHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text('Current location',
-            style: Styles.textStyle14.copyWith(
-              color: AppColors.lightGrayTextColor,
-            )),
-        const SizedBox(
-          height: 8,
-        ),
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Jeddah, Saudi Arabia',
-                style: Styles.textStyle18.copyWith(
-                    color: AppColors.darkTextColor,
-                    fontWeight: FontWeight.bold)),
             const SizedBox(
-              width: 5,
-            ),
-            SvgPicture.asset(
-              AssetsData.group,
-              width: 8,
               height: 8,
-            )
+            ),
+            Text('Current location',
+                style: Styles.textStyle14.copyWith(
+                  color: AppColors.lightGrayTextColor,
+                )),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              children: [
+                Text('Jeddah, Saudi Arabia',
+                    style: Styles.textStyle18.copyWith(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  width: 5,
+                ),
+                SvgPicture.asset(
+                  AssetsData.group,
+                  width: 8,
+                  height: 8,
+                )
+              ],
+            ),
           ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: CircleAvatar(
+            backgroundColor: AppColors.lightBagdesColor,
+            child: SvgPicture.asset(AssetsData.moon),
+          ),
         ),
       ],
     );

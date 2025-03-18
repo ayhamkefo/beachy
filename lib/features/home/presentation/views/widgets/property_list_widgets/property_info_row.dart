@@ -20,11 +20,13 @@ class PropertyInfoRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: Styles.textStyle16.copyWith(
-              color: AppColors.darkTextColor,
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: Text(
+              title,
+              style: Styles.textStyle16.copyWith(
+                color: AppColors.darkTextColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           RichText(
