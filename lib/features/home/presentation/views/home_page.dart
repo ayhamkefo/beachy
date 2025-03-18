@@ -63,7 +63,10 @@ class _HomePageState extends State<HomePage>
               return CustomErrorWidget(
                 errorMessage: state.errorMessage!,
                 textColor: AppColors.darkTextColor,
-                onRetry: () => context.read<HomeBloc>().add(FetchApartments()),
+                onRetry: () {
+                  context.read<HomeBloc>().add(ResetPagination());
+                  context.read<HomeBloc>().add(FetchApartments());
+                },
               );
             }
             return CustomScrollView(
