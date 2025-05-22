@@ -1,5 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'meta.dart';
+part 'apartments_model.g.dart';
 
+@JsonSerializable()
 class Apartments {
   final List<Apartment> data;
   final Meta meta;
@@ -9,25 +12,26 @@ class Apartments {
     required this.meta,
   });
 
-  factory Apartments.fromJson(Map<String, dynamic> json) {
-    return Apartments(
-      data: (json['data'] as List)
-          .map((item) => Apartment.fromJson(item))
-          .toList(),
-      meta: Meta.fromJson(json['meta']),
-    );
-  }
+  factory Apartments.fromJson(Map<String, dynamic> json) =>
+      _$ApartmentsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApartmentsToJson(this);
 }
 
+@JsonSerializable()
 class Apartment {
   final int id;
   final String? title;
   final String? price;
   final int adults;
+  @JsonKey(name: 'cover_image')
   final String? coverImage;
+  @JsonKey(name: 'cover_video')
   final String? coverVideo;
-  final int reservationsCount;
+  @JsonKey(name: 'reservations_count')
+  final String? reservationsCount;
   final String? tag;
+  @JsonKey(name: 'wishlist_item_id')
   final dynamic wishlistItemId;
   final List<ImageData> images;
 
@@ -44,24 +48,13 @@ class Apartment {
     required this.images,
   });
 
-  factory Apartment.fromJson(Map<String, dynamic> json) {
-    return Apartment(
-      id: json['id'],
-      title: json['title'],
-      price: json['price'],
-      adults: json['adults'],
-      coverImage: json['cover_image'],
-      coverVideo: json['cover_video'],
-      reservationsCount: json['reservations_count'],
-      tag: json['tag'],
-      wishlistItemId: json['wishlist_item_id'],
-      images: (json['images'] as List)
-          .map((item) => ImageData.fromJson(item))
-          .toList(),
-    );
-  }
+  factory Apartment.fromJson(Map<String, dynamic> json) =>
+      _$ApartmentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApartmentToJson(this);
 }
 
+@JsonSerializable()
 class ImageData {
   final String src;
 
@@ -69,9 +62,8 @@ class ImageData {
     required this.src,
   });
 
-  factory ImageData.fromJson(Map<String, dynamic> json) {
-    return ImageData(
-      src: json['src'],
-    );
-  }
+  factory ImageData.fromJson(Map<String, dynamic> json) =>
+      _$ImageDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ImageDataToJson(this);
 }

@@ -25,12 +25,13 @@ class HomeRepoImpl implements HomeRepo {
       );
 
       if (response.statusCode == 200) {
-        return Right(ApartmentsData.fromJson(response.data));
+        return Right(ApartmentsData.fromJson(response.data['data']));
       } else {
         return Left(ServerFailure(
             response.data['message'] ?? ErrorHandler.defaultMessage()));
       }
     } catch (e) {
+      print(e.toString());
       return Left(ErrorHandler.handle(e));
     }
   }
