@@ -1,37 +1,26 @@
-import 'package:beachy/core/errors/error_handler.dart';
-import 'package:dartz/dartz.dart';
+import 'dart:developer';
 
-import '../../../../core/api_services/api_services.dart';
-import '../../../../core/api_services/urls.dart';
+import 'package:beachy/core/errors/error_handler.dart';
+import 'package:beachy/features/home/domain/entities/apartments_data_entity.dart';
+import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failuer.dart';
-import '../models/apartments_data_model.dart';
-import 'home_repo.dart';
+import '../data_sources/home_remote_data_source.dart';
+import '../../domain/repositories/home_repo.dart';
 
 class HomeRepoImpl implements HomeRepo {
-  final ApiServices apiServices;
+  final HomeRemoteDataSource _remoteDataSource;
 
-  HomeRepoImpl({required this.apiServices});
+  HomeRepoImpl(this._remoteDataSource);
 
   @override
-  Future<Either<Failure, ApartmentsData>> getApartments({int page = 1}) async {
+  Future<Either<Failure, ApartmentsDataEntity>> getApartments(
+      {int page = 1}) async {
     try {
-      final response = await apiServices.post(
-        data: {
-          "page": page,
-          "per_page": 15,
-          "category_names": ["villa"]
-        },
-        endPoint: Urls.getAprtments,
-      );
-
-      if (response.statusCode == 200) {
-        return Right(ApartmentsData.fromJson(response.data['data']));
-      } else {
-        return Left(ServerFailure(
-            response.data['message'] ?? ErrorHandler.defaultMessage()));
-      }
+      final apartmentsDataModel =
+          await _remoteDataSource.getApartments(page: page);
+      return Right(apartmentsDataModel.toEntity());
     } catch (e) {
-      print(e.toString());
+      log("Home Error: ${e.toString()}");
       return Left(ErrorHandler.handle(e));
     }
   }

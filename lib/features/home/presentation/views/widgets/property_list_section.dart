@@ -1,9 +1,10 @@
+import 'package:beachy/features/home/domain/entities/apartment_entity.dart';
 import 'package:flutter/material.dart';
-import '../../../data/models/apartments_model.dart';
+
 import 'property_list_widgets/property_item_widget.dart';
 
 class PropertyListSection extends StatelessWidget {
-  final List<Apartment> apartments;
+  final List<ApartmentEntity> apartments;
   final bool hasMore;
 
   const PropertyListSection({

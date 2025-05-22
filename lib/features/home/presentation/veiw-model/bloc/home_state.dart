@@ -4,7 +4,7 @@ enum HomeStatus { initial, loading, success, failure }
 
 class HomeState extends Equatable {
   final HomeStatus status;
-  final List<Apartment> apartments;
+  final List<ApartmentEntity> apartments;
   final bool hasReachedMax;
   final int currentPage;
   final String? errorMessage;
@@ -19,7 +19,7 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     HomeStatus? status,
-    List<Apartment>? apartments,
+    List<ApartmentEntity>? apartments,
     bool? hasReachedMax,
     int? currentPage,
     String? errorMessage,

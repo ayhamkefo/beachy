@@ -1,15 +1,15 @@
+import 'package:beachy/features/home/domain/entities/apartment_entity.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/models/apartments_model.dart';
-import '../../../data/repo/home_repo.dart';
+import '../../../domain/usecases/get_apartments_usecase.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final HomeRepo homeRepo;
+  final GetApartmentsUseCase _getApartmentsUseCase;
 
-  HomeBloc({required this.homeRepo}) : super(const HomeState()) {
+  HomeBloc(this._getApartmentsUseCase) : super(const HomeState()) {
     on<FetchApartments>(_fetchApartments);
     on<ResetPagination>(_resetPagination);
   }
@@ -25,18 +25,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         apartments: state.apartments,
       ));
       final nextPage = state.currentPage + 1;
-      final result = await homeRepo.getApartments(page: nextPage);
+      final result = await _getApartmentsUseCase.call(page: nextPage);
       result.fold(
         (failure) => emit(state.copyWith(
           status: HomeStatus.failure,
           errorMessage: failure.message,
         )),
         (data) {
-          final newApartments = [
-            ...state.apartments,
-            ...data.apartmentsData.data
-          ];
-          final hasReachedMax = !data.apartmentsData.meta.hasMorePages;
+          final newApartments = [...state.apartments, ...data.apartments.data];
+          final hasReachedMax = !data.apartments.meta.hasMorePages;
           emit(state.copyWith(
             status: HomeStatus.success,
             apartments: newApartments,
